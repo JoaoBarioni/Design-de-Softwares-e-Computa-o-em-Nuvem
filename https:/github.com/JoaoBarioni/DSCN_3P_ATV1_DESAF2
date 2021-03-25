@@ -1,0 +1,57 @@
+int vermelho = 7;
+int verde = 3;
+int amarelo = 6;
+int verdep = 5;
+int vermelhop = 4;
+int botao = 2;
+int valor = 0;
+
+void setup ()
+{
+  Serial.begin(9600);//teste
+  pinMode(7, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(2, INPUT_PULLUP);
+  attachInterrupt (digitalPinToInterrupt (botao), b, FALLING);
+}
+void loop ()
+{
+
+  if (valor == LOW) {
+    digitalWrite(verdep, LOW);
+    digitalWrite(amarelo, LOW);
+    digitalWrite(vermelho, HIGH);
+    digitalWrite(vermelhop, HIGH);
+    delay(3000);
+    digitalWrite(verde, HIGH);
+    digitalWrite(vermelho, LOW);
+    delay(3000);
+    digitalWrite(amarelo, HIGH);
+    digitalWrite(verde, LOW);
+    delay(1500);
+
+  }
+  else {
+    valor = !valor;
+    digitalWrite(amarelo, LOW);
+    digitalWrite(vermelho, HIGH);
+    digitalWrite(vermelhop, LOW);
+    digitalWrite(verdep, HIGH);
+    delay(3000);
+    digitalWrite(vermelhop, HIGH);
+    digitalWrite(verdep, LOW);
+    digitalWrite(verde, HIGH);
+    digitalWrite(vermelho, LOW);
+    delay(3000);
+    digitalWrite(amarelo, HIGH);
+    digitalWrite(verde, LOW);
+    delay(1500);
+  }
+}
+void b() {
+  valor = HIGH;
+  Serial.print(valor);
+}
