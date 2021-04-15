@@ -1,0 +1,80 @@
+#define val1  3
+#define val2  4
+#define alar  7
+#define pot  5
+
+
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(val1, OUTPUT);
+  pinMode(val2, OUTPUT);
+  pinMode(alar, OUTPUT);
+  pinMode(pot, INPUT);
+}
+
+void loop() {
+  //conversao
+  double  i = analogRead(pot);
+  i = i / 1023;
+  i = i * 100;
+  //processamento
+
+  Serial.print(i);
+
+  if (i <= 59 && i >= 30) {
+    digitalWrite(val1, HIGH);
+    Serial.print(i);
+    Serial.println(" NIVEL MEDIO");
+  }
+  else {
+
+  }
+
+
+  if (i >= 60 && i <= 80) {
+    digitalWrite(val1, LOW);
+    Serial.print(i);
+    Serial.println(" NIVEL ALTO");
+  }
+  else {
+
+  }
+
+
+  if (i >= 10 && i <= 29) {
+    Serial.print(i);
+    Serial.println(" NIVEL BAIXO");
+  }
+  else {
+
+  }
+
+
+
+  if (i >= 80) {
+    digitalWrite(alar, HIGH);
+    digitalWrite(val1, LOW);
+
+    Serial.print(i);
+    Serial.println(" NIVEL MT ALTO");
+
+  }
+  else {
+    digitalWrite(alar, LOW);
+    digitalWrite(val1, HIGH);
+  }
+
+
+    if (i <= 10) {
+    digitalWrite(val2, LOW);
+
+    Serial.print(i);
+    Serial.println(" NIVEL MT BAIXO");
+
+  }
+  else {
+    digitalWrite(val2, HIGH);
+  }
+  delay(1000);
+}
